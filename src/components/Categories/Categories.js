@@ -1,5 +1,7 @@
 import { Component } from 'react';
 
+import * as petsService from '../services/petsService'
+
 import Pet from '../Pet/Pet';
 import CategoryNavigation from './CategoryNavigation/CategoryNavigation';
 
@@ -13,10 +15,8 @@ class Categories extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/pets')
-            .then(res => res.json())
-            .then(res => this.setState({pets: res}))
-            .catch(error => console.log(error));
+        petsService.getAll()
+            .then(res => this.setState({ pets: res }))
     }
     render() {
         return (
