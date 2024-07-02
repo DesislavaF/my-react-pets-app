@@ -1,25 +1,25 @@
 const Header = () => {
     return (
         <header id="site-header">
-            <nav class="navbar">
+            <nav className="navbar">
 
-                <section class="navbar-dashboard">
-                    <div class="first-bar">
+                <section className="navbar-dashboard">
+                    <div className="first-bar">
                         <a href="#">Dashboard</a>
-                        <a class="button" href="#">My Pets</a>
-                        <a class="button" href="#">Add Pet</a>
+                        <a className="button" href="#">My Pets</a>
+                        <a className="button" href="#">Add Pet</a>
                     </div>
-                    <div class="second-bar">
+                    <div className="second-bar">
                         <ul>
                             <li>Welcome, Desislava!</li>
-                            <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                            <li><a href="#"><i className="fas fa-sign-out-alt"></i> Logout</a></li>
                         </ul>
                     </div>
                 </section>
-                <section class="navbar-anonymous">
+                <section className="navbar-anonymous">
                     <ul>
-                        <li><a href="#"><i class="fas fa-user-plus"></i> Register</a></li>
-                        <li><a href="#"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                        <li><a href="#"><i className="fas fa-user-plus"></i> Register</a></li>
+                        <li><a href="#"><i className="fas fa-sign-in-alt"></i> Login</a></li>
                     </ul>
                 </section>
             </nav>
