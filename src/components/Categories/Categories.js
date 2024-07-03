@@ -10,13 +10,26 @@ class Categories extends Component {
         super(props);
 
         this.state = {
-            pets: []
+            pets: [],
+            currentCategory: 'all',
         }
     }
 
     componentDidMount() {
         petsService.getAll()
-            .then(res => this.setState({ pets: res }))
+            .then(res => this.setState({ pets: res }));
+    }
+
+    componentDidUpdate(prevProps) {
+        const category = this.props.match.params.category;
+
+        if (prevProps.match.params.category == category) {
+            return;
+        }
+
+        petsService.getAll(category)
+            .then(res => 
+                this.setState({ pets: res, currentCategory: category}))
     }
     render() {
         return (
