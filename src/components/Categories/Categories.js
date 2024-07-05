@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import * as petsService from '../services/petsService'
+import * as petsService from '../../services/petsService'
 
 import Pet from '../Pet/Pet';
 import CategoryNavigation from './CategoryNavigation/CategoryNavigation';
