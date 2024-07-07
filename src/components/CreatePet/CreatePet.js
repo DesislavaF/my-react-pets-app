@@ -1,47 +1,60 @@
+import * as petsService from '../../services/petsService';
 
-const CreatePet = () => {
+const CreatePet = ({
+    history,
+}) => {
+    const OnCreatePetSubmitHandler = (e) => {
+        e.preventDefault();
+        
+        const { name, description, imageURL, category } = e.target;
 
+        petsService.create(name.value, description.value, imageURL.value, category.value)
+            .then(() => {
+                history.push('/');
+            })
+    };
+    
     return(
-        <section class="create">
-                <form>
+        <section className="create">
+                <form onSubmit={OnCreatePetSubmitHandler}>
                     <fieldset>
                         <legend>Add new Pet</legend>
-                        <p class="field">
-                            <label for="name">Name</label>
-                            <span class="input">
+                        <p className="field">
+                            <label htmlFor="name">Name</label>
+                            <span className="input">
                                 <input type="text" name="name" id="name" placeholder="Name" />
-                                <span class="actions"></span>
+                                <span className="actions"></span>
                             </span>
                         </p>
-                        <p class="field">
-                            <label for="description">Description</label>
-                            <span class="input">
+                        <p className="field">
+                            <label htmlFor="description">Description</label>
+                            <span className="input">
                                 <textarea rows="4" cols="45" type="text" name="description" id="description"
                                     placeholder="Description"></textarea>
-                                <span class="actions"></span>
+                                <span className="actions"></span>
                             </span>
                         </p>
-                        <p class="field">
-                            <label for="image">Image</label>
-                            <span class="input">
+                        <p className="field">
+                            <label htmlFor="image">Image</label>
+                            <span className="input">
                                 <input type="text" name="imageURL" id="image" placeholder="Image" />
-                                <span class="actions"></span>
+                                <span className="actions"></span>
                             </span>
                         </p>
-                        <p class="field">
-                            <label for="category">Category</label>
-                            <span class="input">
+                        <p className="field">
+                            <label htmlFor="category">Category</label>
+                            <span className="input">
                                 <select type="text" name="category">
-                                    <option>Cat</option>
-                                    <option>Dog</option>
-                                    <option>Parrot</option>
-                                    <option>Reptile</option>
-                                    <option>Other</option>
+                                    <option value="Cat">Cat</option>
+                                    <option value="Dog">Dog</option>
+                                    <option value="Parrot">Parrot</option>
+                                    <option value="Reptile">Reptile</option>
+                                    <option value="Other">Other</option>
                                 </select>
-                                <span class="actions"></span>
+                                <span className="actions"></span>
                             </span>
                         </p>
-                        <input class="button" type="submit" class="submit" value="Add Pet" />
+                        <input className="button submit" type="submit" value="Add Pet" />
                     </fieldset>
                 </form>
             </section>

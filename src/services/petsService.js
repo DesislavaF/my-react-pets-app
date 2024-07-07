@@ -52,4 +52,4 @@ export const pet = (petId, likes) => {
         body: JSON.stringify({likes})
     })
         .then(res => res.json());
-}
+};
