@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as petsService from '../../services/petsService';
 
+import InputError from '../Shared/InputError/InputError';
 
 const EditPetDetails = ({
     match,
@@ -45,7 +46,7 @@ const EditPetDetails = ({
             <p className="img"><img src={pet.imageURL} /></p>
             <form onSubmit={onDescriptionSaveSubmit}>
                 <textarea type="text" name="description" onBlur={onDescriptionChangeHandler} defaultValue={pet.description}></textarea>
-                
+                <InputError>{errorMessage}</InputError>
                 <button className="button">Save</button>
             </form>
         </section>
