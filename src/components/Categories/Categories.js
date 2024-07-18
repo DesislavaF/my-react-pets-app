@@ -9,7 +9,7 @@ class Categories extends Component {
 
         this.state = {
             pets: [],
-            currentCategory: 'all',
+            currentCategory: '',
         };
 
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
@@ -17,19 +17,23 @@ class Categories extends Component {
 
     componentDidMount() {
         const category = this.props.match.params.category || 'all';
-        this.fetchPets(category);
+        if (category !== this.state.currentCategory) {
+          this.handleCategoryChange(category);
+        }
+        
+            this.fetchPets(category);
     }
 
     componentDidUpdate(prevProps) {
         const category = this.props.match.params.category || 'all';
-        if (prevProps.match.params.category !== category) {
-            this.fetchPets(category);
+        if (this.state.currentCategory !== category) {
+          this.handleCategoryChange(category);
         }
     }
 
     handleCategoryChange(category) {
         this.setState({ currentCategory: category });
-        this.fetchPets(category);
+            this.fetchPets(category);
     }
 
     fetchPets(category = 'all') {
@@ -42,13 +46,13 @@ class Categories extends Component {
             <div className="dashboard">
                 <h1>Dashboard</h1>
 
-                <CategoryNavigation onCategoryChange={this.handleCategoryChange} />
+                <CategoryNavigation currentCategory={this.state.currentCategory} />
 
-                <ul className="other-pets-list">
+                {<ul className="other-pets-list">
                     {this.state.pets.map(x =>
                         <PetCard key={x.id} {...x} />
                     )}
-                </ul>
+                </ul>}
             </div>
         );
     }

@@ -1,24 +1,15 @@
 import React from 'react';
-import { NavLink, useLocation, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const CategoryNavigation = ({ onCategoryChange }) => {
-    const location = useLocation();
-    const history = useHistory();
-
-    const handleCategoryChange = (category) => {
-        onCategoryChange(category);
-        history.push(`/categories/${category}`);
-    };
-
+const CategoryNavigation = ({ currentCategory }) => {
     return (
         <nav className="navbar">
             <ul>
                 <li>
                     <NavLink 
                         to="/categories/all" 
-                        isActive={() => location.pathname === '/categories/all' || location.pathname === '/categories'}
-                        className={({ isActive }) => isActive ? 'active' : ''}
-                        onClick={() => handleCategoryChange('all')}
+                        isActive={() => currentCategory === 'all'}
+                        activeClassName={'active'}
                     >
                         All
                     </NavLink>
@@ -26,9 +17,8 @@ const CategoryNavigation = ({ onCategoryChange }) => {
                 <li>
                     <NavLink 
                         to="/categories/Cat" 
-                        isActive={() => location.pathname === '/categories/Cat'}
-                        className={({ isActive }) => isActive ? 'active' : ''}
-                        onClick={() => handleCategoryChange('Cat')}
+                        isActive={() => currentCategory === 'Cat'}
+                        activeClassName={'active'}
                     >
                         Cats
                     </NavLink>
@@ -36,9 +26,8 @@ const CategoryNavigation = ({ onCategoryChange }) => {
                 <li>
                     <NavLink 
                         to="/categories/Dog" 
-                        isActive={() => location.pathname === '/categories/Dog'}
-                        className={({ isActive }) => isActive ? 'active' : ''}
-                        onClick={() => handleCategoryChange('Dog')}
+                        isActive={() => currentCategory === 'Dog'}
+                        activeClassName={'active'}
                     >
                         Dogs
                     </NavLink>
@@ -46,9 +35,8 @@ const CategoryNavigation = ({ onCategoryChange }) => {
                 <li>
                     <NavLink 
                         to="/categories/Parrot" 
-                        isActive={() => location.pathname === '/categories/Parrot'}
-                        className={({ isActive }) => isActive ? 'active' : ''}
-                        onClick={() => handleCategoryChange('Parrot')}
+                        isActive={() => currentCategory === 'Parrot'}
+                        activeClassName={'active'}
                     >
                         Parrots
                     </NavLink>
@@ -56,9 +44,8 @@ const CategoryNavigation = ({ onCategoryChange }) => {
                 <li>
                     <NavLink 
                         to="/categories/Reptile" 
-                        isActive={() => location.pathname === '/categories/Reptile'}
-                        className={({ isActive }) => isActive ? 'active' : ''}
-                        onClick={() => handleCategoryChange('Reptile')}
+                        isActive={() => currentCategory === 'Reptile'}
+                        activeClassName={'active'}
                     >
                         Reptiles
                     </NavLink>
@@ -66,9 +53,8 @@ const CategoryNavigation = ({ onCategoryChange }) => {
                 <li>
                     <NavLink 
                         to="/categories/Other" 
-                        isActive={() => location.pathname === '/categories/Other'}
-                        className={({ isActive }) => isActive ? 'active' : ''}
-                        onClick={() => handleCategoryChange('Other')}
+                        isActive={() => currentCategory === 'Other'}
+                        activeClassName={'active'}
                     >
                         Other
                     </NavLink>
@@ -85,4 +71,3 @@ const CategoryNavigation = ({ onCategoryChange }) => {
 };
 
 export default CategoryNavigation;
-
