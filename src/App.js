@@ -1,7 +1,5 @@
+import React, { useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import React from 'react';
-
-
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Login from './components/Login/Login';
@@ -11,26 +9,20 @@ import PetDetails from './components/PetDetails/PetDetails';
 import EditPetDetails from './components/EditPetDetails/EditPetDetails';
 import EditPet from './components/EditPet/EditPet';
 import CreatePet from './components/CreatePet/CreatePet';
-import auth from './utils/firebase';
-import { useEffect, useState } from 'react';
-
-
 import './App.css';
+import { auth } from './utils/firebase'; // Ensure this import is correct
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    auth.onAuthStateChanged(setUser);
-      setUser(user);
-    }, []);
-
-  
+    const unsubscribe = auth.onAuthStateChanged(setUser);
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, []);
 
   return (
     <div className="container">
       <Header user={user} />
-      
       <Switch>
         <Route path="/" exact component={Categories} />
         <Route path="/categories/:category" component={Categories} />
@@ -38,14 +30,13 @@ function App() {
         <Route path="/pets/details/:petId/edit" component={EditPetDetails} />
         <Route path="/pets/create" component={CreatePet} />
         <Route path="/pets/:petId/edit" component={EditPet} />
-        <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/login" component={Login} />
         <Route path="/logout" render={() => {
-              auth.signOut();
-              return <Redirect to="/" />
-            }} />
+          auth.signOut();
+          return <Redirect to="/" />;
+        }} />
       </Switch>
-
       <Footer />
     </div>
   );
