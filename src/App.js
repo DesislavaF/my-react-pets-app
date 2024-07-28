@@ -29,8 +29,8 @@ function App() {
 
   return (
     <div className="container">
-      <Header />
-      <h1>{user?.email}</h1>
+      <Header user={user} />
+      
       <Switch>
         <Route path="/" exact component={Categories} />
         <Route path="/categories/:category" component={Categories} />
