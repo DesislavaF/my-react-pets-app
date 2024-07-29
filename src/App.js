@@ -19,19 +19,24 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged(setUser);
     return () => unsubscribe(); // Cleanup subscription on unmount
   }, []);
+  
+  const authInfo = {
+    isAuthenticated: Boolean(user),
+    username: user ? user.email : null,
+  };
 
   return (
     <div className="container">
-      <Header user={user} />
+      <Header {...authInfo}/>
       <Switch>
-        <Route path="/" exact component={Categories} />
-        <Route path="/categories/:category" component={Categories} />
-        <Route path="/pets/details/:petId" exact component={PetDetails} />
-        <Route path="/pets/details/:petId/edit" component={EditPetDetails} />
-        <Route path="/pets/create" component={CreatePet} />
-        <Route path="/pets/:petId/edit" component={EditPet} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
+        <Route path="/" exact render={props => <Categories {...props} {...authInfo} />} />
+        <Route path="/categories/:category" render={props => <Categories {...props} {...authInfo} />} />
+        <Route path="/pets/details/:petId" exact render={props => <PetDetails {...props} {...authInfo} />} />
+        <Route path="/pets/details/:petId/edit" render={props => <EditPetDetails {...props} {...authInfo} />} />
+        <Route path="/pets/create" render={props => <CreatePet {...props} {...authInfo} />} />
+        <Route path="/pets/:petId/edit" render={props => <EditPet {...props} {...authInfo} />} />
+        <Route path="/register" render={props => <Register {...props} {...authInfo} />} />
+        <Route path="/login" render={props => <Login {...props} {...authInfo} />} />
         <Route path="/logout" render={() => {
           auth.signOut();
           return <Redirect to="/" />;

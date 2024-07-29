@@ -1,8 +1,11 @@
-import { auth } from '../../utils/firebase';
+
 import { Link } from 'react-router-dom';
 
 
-const Header = () => {
+const Header = ({
+    isAuthenticated,
+    username,
+}) => {
     return (
         <header id="site-header">
             <nav className="navbar">
@@ -16,7 +19,11 @@ const Header = () => {
                     </div>
                     <div className="second-bar">
                         <ul>
-                            <li>Welcome, Desislava!</li>
+                            {isAuthenticated
+                                ? <li>Welcome, {username}!</li>
+                                : <li>Welcome, Guest!</li>
+                            }
+                            
                             <li><Link to="/logout"><i className="fas fa-sign-out-alt"></i> Logout</Link></li>
                         </ul>
                     </div>
