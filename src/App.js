@@ -22,7 +22,7 @@ function App() {
   
   const authInfo = {
     isAuthenticated: Boolean(user),
-    username: user ? user.email : null,
+    username: user?.email,
   };
 
   return (

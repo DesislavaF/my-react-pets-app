@@ -1,11 +1,32 @@
-
+import { auth } from '../../utils/firebase'
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 const Header = ({
     isAuthenticated,
     username,
 }) => {
+    useEffect(() => {
+        if (!isAuthenticated) {
+            return;
+        }
+
+        auth.currentUser.getIdToken(true)
+            .then(function (idToken) {
+                return fetch('http://localhost:5001', {
+                    headers: {
+                        'Authorization': idToken
+                    }
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            });
+
+    }, [isAuthenticated])
+
     return (
         <header id="site-header">
             <nav className="navbar">
@@ -15,7 +36,7 @@ const Header = ({
                         <Link to="/">Dashboard</Link>
                         <Link className="button" to="#">My Pets</Link>
                         <Link className="button" to="/pets/create">Add Pet</Link>
-                       
+
                     </div>
                     <div className="second-bar">
                         <ul>
@@ -23,7 +44,7 @@ const Header = ({
                                 ? <li>Welcome, {username}!</li>
                                 : <li>Welcome, Guest!</li>
                             }
-                            
+
                             <li><Link to="/logout"><i className="fas fa-sign-out-alt"></i> Logout</Link></li>
                         </ul>
                     </div>
@@ -35,7 +56,7 @@ const Header = ({
                     </ul>
                 </section>
             </nav>
-            
+
         </header>
     )
 };
